@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}home{% endblock title %}
+{% block content %}
+<style>
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.card {
+    margin: 15px;
+    width: 18rem; /* You can adjust this width as needed */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card {
+        width: 100%; /* Full width on smaller screens */
+        max-width: 300px; /* Optional: set a max width */
+    }
+}
+
+</style>
+    <div>
+        {% for film in films %}
+        <a href = "{% url "film_detail" film.id %}">
+        <div class="card" style="width: 18rem;">
+            <img src="{{film.image}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{film.name}}</h5>
+              <p class="card-text">{{film.janre}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">{{film.created_on}}</li>
+            </ul>
+            <div class="card-body">
+              <a href="{% url "order_create" %}" class="card-link">order</a>
+              <a href="{% url "trailer" film.id %}" class="card-link">see trailer</a>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+    </div>
+{% endblock content %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}janres{% endblock title %}
+{% block content %}
+<style>
+    /* Container for the genres */
+.janre-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Individual genre item styles */
+.janre-container a {
+    background-color: #f8f9fa; /* Light background */
+    border: 1px solid #ced4da; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    margin: 10px 0; /* Space between items */
+    padding: 15px; /* Padding inside each item */
+    width: 100%; /* Full width */
+    max-width: 400px; /* Optional: max width for items */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline from links */
+    color: #333; /* Text color */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.janre-container a:hover {
+    background-color: #e2e6ea; /* Darker background on hover */
+}
+
+</style>
+    {% for janre in janres %}
+        <a href = "{% url "janre_detail" janre.id %}">
+            <div>
+                <h5>{{janre.name}}</h5>
+            </div>
+        </a>
+    {% endfor %}
+{% endblock content %}

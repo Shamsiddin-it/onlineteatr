@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+  }
+  
+  body {
+      display: flex;
+      flex-direction: column;
+  }
+  
+  main {
+      flex: 1;
+  }
+  
+  footer {
+      background-color: rgba(0, 0, 0, 0.2);
+      text-align: center;
+      padding: 1rem;
+  }
+  
+  </style>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Navbar</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url "home" %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "janre_list" %}">all janres</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "show_list" %}">all shows</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "order_list" %}">all orders</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "teatr_list" %}">all teatrs</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Create
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li><a class="dropdown-item" href="{% url "user_create" %}">User</a></li>
+                      <li><a class="dropdown-item" href="{% url "janre_create" %}">janre</a></li>
+                      <li><a class="dropdown-item" href="{% url "teatr_create" %}">Teatr</a></li>
+                      <li><a class="dropdown-item" href="{% url "film_create" %}">film</a></li>
+                      <li><a class="dropdown-item" href="{% url "show_create" %}">show</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+    </header>
+    {% block content %}{% endblock content %}
+    <footer class="bg-primary text-center text-white">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2020 Copyright:
+            <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+        </footer>
+</body>
+</html>
+

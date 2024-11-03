@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 
 class Home(TemplateView):
     template_name = "home.html"
+    
 
 class UserListView(ListView):
     model = User
@@ -21,7 +22,7 @@ class UserCreateView(CreateView):
     model = User
     template_name = "user_create.html"
     fields = ['full_name', 'phone']
-    success_url = reverse_lazy("user_list")
+    success_url = reverse_lazy("home")
 
 class UserUpdateView(UpdateView):
     model = User
@@ -43,6 +44,11 @@ class JanreListView(ListView):
 class JanreDetailView(DetailView):
     model = Janre
     template_name = "janre_detail.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["film_janre"] = Film.objects.filter(janre = self.kwargs["pk"])
+        return context
+    
     context_object_name = "janre"
 
 
@@ -95,12 +101,17 @@ class TeatrDeleteView(DeleteView):
 
 class FilmListView(ListView):
     model = Film
-    template_name = "film_list.html"
+    template_name = "home.html"
     context_object_name = "films"
 
 class FilmDetailView(DetailView):
     model = Film
     template_name = "film_detail.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["film_show"] = Show.objects.filter(film = self.kwargs["pk"])
+        return context
+    
     context_object_name = "film"
 
 
@@ -166,13 +177,13 @@ class OrderDetailView(DetailView):
 class OrderCreateView(CreateView):
     model = Order
     template_name = "order_create.html"
-    fields = ['show', 'amount', 'payment', 'total', 'user']
+    fields = [ 'amount', 'name', 'phone']
     success_url = reverse_lazy("order_list")
 
 class OrderUpdateView(UpdateView):
     model = Order
     template_name = "order_update.html"
-    fields = ['show', 'amount', 'payment', 'total', 'user']
+    fields = [ 'amount', 'name', 'phone']
     success_url = reverse_lazy("order_list")
 
 class OrderDeleteView(DeleteView):
@@ -180,4 +191,12 @@ class OrderDeleteView(DeleteView):
     template_name = "order_delete.html"
     success_url = reverse_lazy("order_list")
 
+class TrailerListView(DetailView):
+    template_name = "trailer.html"
+    model = Film
 
+class PaymentListView(CreateView):
+    template_name = "payment.html"
+    model = Payment
+    fields = ['type']
+    success_url = reverse_lazy("home")

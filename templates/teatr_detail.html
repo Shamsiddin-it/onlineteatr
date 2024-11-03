@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}teatr{% endblock title %}
+{% block content %}
+    <div>
+
+        <div class="card" style="width: 18rem;">
+          {% if teatr.image %}
+            <img src="{{teatr.image.url}}" class="card-img-top" alt="...">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{teatr.name}}</h5>
+              <p class="card-text">{{teatr.address}}</p>
+            </div>
+
+            <div class="card-body">
+              <a href="{% url "teatr_update" teatr.id %}" class="card-link">update</a>
+              <a href="{% url "teatr_delete" teatr.id %}" class="card-link">delete</a>
+            </div>
+          </div>
+
+    </div>
+{% endblock content %}

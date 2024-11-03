@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}show{% endblock title %}
+{% block content %}
+
+<div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+    <div class="card-header">{{show.teatr}}</div>
+    <div class="card-body">
+      <h5 class="card-title">{{show.date}}</h5>
+      <p class="card-text">{{show.time}}</p>
+      <h5 class="card-title">{{show.price_bil}}</h5>
+      <a href="{% url "order_create" %}" class="card-link">order billet</a>
+    </div>
+    <a href="{% url "show_update" show.id %}" class="card-link">update</a>
+    <a href="{% url "show_delete" show.id %}" class="card-link">delete</a>
+  </div>
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}teatr{% endblock title %}
+{% block content %}
+<style>
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.card {
+    margin: 15px;
+    width: 18rem; /* You can adjust this width as needed */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card {
+        width: 100%; /* Full width on smaller screens */
+        max-width: 300px; /* Optional: set a max width */
+    }
+}
+
+</style>
+    <div>
+        {% for teatr in teatrs %}
+        <a href = "{% url "teatr_detail" teatr.id %}">
+        <div class="card" style="width: 18rem;">
+            {% if teatr.image %}
+                <img src="{{teatr.image.url}}" class="card-img-top" alt="...">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{teatr.name}}</h5>
+              <p class="card-text">{{teatr.address}}</p>
+            </div>
+
+          </div>
+        </a>
+        {% endfor %}
+    </div>
+{% endblock content %}

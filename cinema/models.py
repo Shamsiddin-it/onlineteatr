@@ -37,15 +37,18 @@ class Show(models.Model):
     time = models.DateTimeField()
     teatr =  models.ForeignKey(Teatr, on_delete=models.CASCADE)
     price_bil = models.DecimalField(max_digits=6, decimal_places=2)
+    def __str__(self):
+        return f"{self.film}"
 
 class Order(models.Model):
-    show = models.ForeignKey(Show, on_delete=models.CASCADE)
     amount = models.IntegerField()
-    PAY_TYPE = (
-        ("CARD","card"),
-        ("CASH","cash"),
-    )
-    payment = models.CharField(choices=PAY_TYPE,max_length=50)
-    total = models.DecimalField( max_digits=10, decimal_places=2)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField( max_length=50)
+    phone = models.CharField(max_length=50)
 
+
+class Payment(models.Model):
+    TYPE = (
+        ("CARD", "card"),
+        ("CASH", "cash"),
+    )
+    type = models.CharField(choices=TYPE ,max_length=50)
