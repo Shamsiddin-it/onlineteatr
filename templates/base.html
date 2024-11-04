@@ -12,26 +12,61 @@
 <body>
   <style>
     html, body {
-      height: 100%;
-      margin: 0;
-  }
-  
-  body {
-      display: flex;
-      flex-direction: column;
-  }
-  
-  main {
-      flex: 1;
-  }
-  
-  footer {
-      background-color: rgba(0, 0, 0, 0.2);
-      text-align: center;
-      padding: 1rem;
-  }
-  
-  </style>
+        height: 100%;
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa; 
+    }
+    
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    main {
+        flex: 1;
+        padding: 20px; 
+    }
+    
+    header {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    }
+
+    nav .navbar {
+        background-color: #007bff; 
+    }
+
+    nav .navbar-brand, 
+    nav .nav-link {
+        color: white; 
+    }
+
+    nav .nav-link:hover {
+        text-decoration: underline; 
+    }
+    
+    footer {
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+        text-align: center;
+        padding: 1rem;
+        position: absolute;
+        top: 98%;
+        margin-top: 100px;    
+      }
+
+    footer .text-center {
+        background-color: rgba(0, 0, 0, 0.2); 
+    }
+
+    
+    @media (max-width: 768px) {
+        nav .navbar-nav {
+            flex-direction: column; 
+        }
+    }
+</style>
+
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -75,12 +110,10 @@
     </header>
     {% block content %}{% endblock content %}
     <footer class="bg-primary text-center text-white">
-        <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2020 Copyright:
-            <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            © 2024 Copyright:
+            Made by me
         </div>
-        <!-- Copyright -->
         </footer>
 </body>
 </html>

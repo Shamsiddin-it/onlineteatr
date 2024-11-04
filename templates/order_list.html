@@ -5,34 +5,56 @@
   .card-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center; /* Center the cards */
     padding: 20px;
-}
+    gap: 20px; /* Space between cards */
+  }
 
-.card {
-    margin: 15px;
-    width: 18rem; /* You can adjust this width as needed */
-}
+  .card {
+    width: 18rem; /* Fixed width for cards */
+    border: 1px solid #ced4da; /* Light border for cards */
+    border-radius: 8px; /* Rounded corners */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effects */
+    background-color: #f8f9fa; /* Light background */
+  }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+  .card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+  }
+
+  .card-header {
+    font-weight: bold; /* Bold header for emphasis */
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text for contrast */
+  }
+
+  .card-title {
+    font-size: 1.2rem; /* Slightly larger title */
+    margin: 0; /* Remove default margin */
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
     .card {
-        width: 100%; /* Full width on smaller screens */
-        max-width: 300px; /* Optional: set a max width */
+      width: 100%; /* Full width on smaller screens */
+      max-width: 300px; /* Optional: set a max width */
     }
-}
-
+  }
 </style>
-{% for order in orders %}
-<a href = "{% url "order_detail" order.id %}">
-<div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-    <div class="card-header">{{order.showr}}</div>
-    <div class="card-body">
-      <h5 class="card-title">{{order.amount}}</h5>
-      <p class="card-text">{{order.phone}}</p>
-      <h5 class="card-title">{{order.name}}</h5>
-    </div>
- </div>
-</a>
-{% endfor %}
+
+<div class="card-container">
+    {% for order in orders %}
+    <a href="{% url "order_detail" order.id %}" style="text-decoration: none;">
+      <div class="card text-dark mb-3">
+        <div class="card-header">{{ order.show }}</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ order.amount }}</h5>
+          <p class="card-text">{{ order.phone }}</p>
+          <h5 class="card-title">{{ order.name }}</h5>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+</div>
 {% endblock content %}

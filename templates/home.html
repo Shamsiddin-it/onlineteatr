@@ -2,45 +2,89 @@
 {% block title %}home{% endblock title %}
 {% block content %}
 <style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa; 
+    color: #333;
+  }
+
   .card-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center; 
     padding: 20px;
-}
+    gap: 20px; 
+  }
 
-.card {
-    margin: 15px;
-    width: 18rem; /* You can adjust this width as needed */
-}
+  .card {
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.2s, box-shadow 0.2s; 
+    background-color: white; 
+    width: 18rem; 
+    margin-top: 5px; 
+    margin-bottom: 15px; 
+  }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+  .card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+  }
+
+  .card-img-top {
+    border-top-left-radius: 8px; 
+    border-top-right-radius: 8px;
+    height: 150px; 
+    object-fit: cover; 
+  }
+
+  .card-title {
+    font-size: 1.25rem; 
+    font-weight: bold; 
+  }
+
+  .list-group-item {
+    background-color: #f8f9fa; 
+    border: none; 
+  }
+
+  .card-link {
+    color: #007bff; 
+    text-decoration: none; 
+  }
+
+  .card-link:hover {
+    text-decoration: underline; 
+  }
+
+  
+  @media (max-width: 768px) {
     .card {
-        width: 100%; /* Full width on smaller screens */
-        max-width: 300px; /* Optional: set a max width */
+      width: 100%;
+      max-width: 300px;
     }
-}
-
+  }
 </style>
-    <div>
-        {% for film in films %}
-        <a href = "{% url "film_detail" film.id %}">
-        <div class="card" style="width: 18rem;">
-            <img src="{{film.image}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{film.name}}</h5>
-              <p class="card-text">{{film.janre}}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">{{film.created_on}}</li>
-            </ul>
-            <div class="card-body">
-              <a href="{% url "order_create" %}" class="card-link">order</a>
-              <a href="{% url "trailer" film.id %}" class="card-link">see trailer</a>
-            </div>
+
+<div class="card-container">
+    {% for film in films %}
+    <a href="{% url "film_detail" film.id %}" style="text-decoration: none;">
+      <div class="card">
+          <img src="{{ film.image }}" class="card-img-top" alt="{{ film.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ film.name }}</h5>
+            <p class="card-text">{{ film.janre }}</p>
           </div>
-        </a>
-        {% endfor %}
-    </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ film.created_on }}</li>
+          </ul>
+          <div class="card-body">
+            <a href="{% url "order_create" %}" class="card-link">Order</a>
+            <a href="{% url "trailer" film.id %}" class="card-link">See Trailer</a>
+          </div>
+      </div>
+    </a>
+    {% endfor %}
+</div>
 {% endblock content %}

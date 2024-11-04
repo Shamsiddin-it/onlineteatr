@@ -1,22 +1,62 @@
 {% extends "base.html" %}
-{% block title %}teatr{% endblock title %}
+{% block title %}Teatr{% endblock title %}
 {% block content %}
-    <div>
+<style>
+    .teatr-container {
+        display: flex;
+        justify-content: center; /* Center the card */
+        margin-top: 20px; /* Space above the card */
+    }
 
-        <div class="card" style="width: 18rem;">
-          {% if teatr.image %}
-            <img src="{{teatr.image.url}}" class="card-img-top" alt="...">
-            {% endif %}
-            <div class="card-body">
-              <h5 class="card-title">{{teatr.name}}</h5>
-              <p class="card-text">{{teatr.address}}</p>
-            </div>
+    .card {
+        width: 18rem; /* Fixed width for the card */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        transition: transform 0.2s; /* Smooth hover effect */
+    }
 
-            <div class="card-body">
-              <a href="{% url "teatr_update" teatr.id %}" class="card-link">update</a>
-              <a href="{% url "teatr_delete" teatr.id %}" class="card-link">delete</a>
-            </div>
-          </div>
+    .card:hover {
+        transform: translateY(-5px); /* Lift effect on hover */
+    }
 
+    .card-body {
+        text-align: center; /* Center text in the card body */
+    }
+
+    .card-title {
+        margin-bottom: 10px; /* Space below title */
+        font-size: 1.25rem; /* Slightly larger title */
+    }
+
+    .card-link {
+        text-decoration: none; /* Remove underline */
+        color: #007bff; /* Bootstrap primary color */
+    }
+
+    .card-link:hover {
+        text-decoration: underline; /* Underline on hover */
+    }
+
+    img {
+        border-top-left-radius: 8px; /* Match card corners */
+        border-top-right-radius: 8px;
+    }
+</style>
+
+<div class="teatr-container">
+    <div class="card text-dark bg-light mb-3">
+        {% if teatr.image %}
+            <img src="{{ teatr.image.url }}" class="card-img-top" alt="{{ teatr.name }}">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{ teatr.name }}</h5>
+            <p class="card-text">{{ teatr.address }}</p>
+        </div>
+        <div class="card-body">
+            <a href="{% url 'teatr_update' teatr.id %}" class="card-link">Update</a>
+            <a href="{% url 'teatr_delete' teatr.id %}" class="card-link text-danger">Delete</a>
+        </div>
     </div>
+</div>
+
 {% endblock content %}

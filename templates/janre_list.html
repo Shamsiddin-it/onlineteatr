@@ -2,39 +2,42 @@
 {% block title %}janres{% endblock title %}
 {% block content %}
 <style>
-    /* Container for the genres */
-.janre-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
+    .janre-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
 
-/* Individual genre item styles */
-.janre-container a {
-    background-color: #f8f9fa; /* Light background */
-    border: 1px solid #ced4da; /* Light border */
-    border-radius: 5px; /* Rounded corners */
-    margin: 10px 0; /* Space between items */
-    padding: 15px; /* Padding inside each item */
-    width: 100%; /* Full width */
-    max-width: 400px; /* Optional: max width for items */
-    text-align: center; /* Center text */
-    text-decoration: none; /* Remove underline from links */
-    color: #333; /* Text color */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-}
+    .janre-item {
+        background-color: #f8f9fa; 
+        border: 1px solid #ced4da; 
+        border-radius: 5px; 
+        margin: 10px 0; 
+        padding: 15px; 
+        width: 100%;
+        max-width: 400px; 
+        text-align: center; 
+        text-decoration: none; 
+        color: #333; 
+        transition: background-color 0.3s, transform 0.2s;
+    }
 
-.janre-container a:hover {
-    background-color: #e2e6ea; /* Darker background on hover */
-}
+    .janre-item:hover {
+        background-color: #e2e6ea; 
+        transform: translateY(-2px); 
+    }
 
+    .janre-item h5 {
+        margin: 0; 
+        font-size: 1.2rem; 
+    }
 </style>
+<div class="janre-container">
     {% for janre in janres %}
-        <a href = "{% url "janre_detail" janre.id %}">
-            <div>
-                <h5>{{janre.name}}</h5>
-            </div>
+        <a href="{% url "janre_detail" janre.id %}" class="janre-item">
+            <h5>{{ janre.name }}</h5>
         </a>
     {% endfor %}
+</div>
 {% endblock content %}

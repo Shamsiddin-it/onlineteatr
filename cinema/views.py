@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView, ListView, DeleteView, DetailView, UpdateView, CreateView
 from .models import *
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 
 
 class Home(TemplateView):
@@ -119,7 +120,7 @@ class FilmCreateView(CreateView):
     model = Film
     template_name = "film_create.html"
     fields = ['name', 'janre', 'created_on', 'image', 'trailer', 'description']
-    success_url = reverse_lazy("film_list")
+    success_url = reverse_lazy("home")
 
 class FilmUpdateView(UpdateView):
     model = Film
@@ -178,7 +179,10 @@ class OrderCreateView(CreateView):
     model = Order
     template_name = "order_create.html"
     fields = [ 'amount', 'name', 'phone']
-    success_url = reverse_lazy("order_list")
+    def form_valid(self, form):
+        self.object = form.save()
+        return redirect('payment')
+    
 
 class OrderUpdateView(UpdateView):
     model = Order

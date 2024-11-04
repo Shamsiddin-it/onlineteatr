@@ -29,9 +29,12 @@
     }
     
 </style>
-    <form method = "post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{form.as_p}}
-        <a href = "{% url "payment"  %}"><button type = "submit">Save</button></a>
-    </form>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Order</button>
+</form>
+
+
 {% endblock content %}

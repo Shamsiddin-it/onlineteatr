@@ -1,38 +1,78 @@
 {% extends "base.html" %}
-{% block title %}film{% endblock title %}
+{% block title %}Film{% endblock title %}
 {% block content %}
-    <div>
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <video controls class="img-fluid" width="100%">
-                    <source src="{{film.trailer.url}}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">{{film.name}}</h5>
-                  <p class="card-text">{{film.description}}</p>
-                  <p class="card-text"><small class="text-muted">{{film.janre}}</small></p>
-                  <p class="card-text"><small class="text-muted">{{film.created_on}} </small></p>
-                  <a href="{% url "film_update" film.id %}" class="card-link">update</a>
-                  <a href="{% url "film_delete" film.id %}" class="card-link">delete</a>
-                </div>
-              </div>
-            </div>
-          </div>
-    </div>
+<style>
+    .film-card {
+        max-width: 540px;
+        margin: 20px auto;
+        border-radius: 8px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    }
 
-    {% for show in film_show %}
-    <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-        <div class="card-header">{{show.teatr}}</div>
-        <div class="card-body">
-          <h5 class="card-title">{{show.date}}</h5>
-          <p class="card-text">{{show.time}}</p>
-          <h5 class="card-title">{{show.price_bil}}</h5>
-          <a href="{% url "order_create" %}" class="card-link">order billet</a>
+    .show-card {
+        max-width: 18rem;
+        margin: 10px auto; 
+        border-radius: 8px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    }
+
+    .card-link {
+        text-decoration: none; 
+        color: #007bff; 
+    }
+
+    .card-link:hover {
+        text-decoration: underline; 
+        color: #0056b3; 
+    }
+
+    video {
+        border-radius: 8px; 
+    }
+
+    @media (max-width: 768px) {
+        .film-card {
+            width: 100%; 
+        }
+    }
+</style>
+
+<div class="film-card card mb-3">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <video controls class="img-fluid" width="100%">
+                <source src="{{ film.trailer.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
-      </div>
-    {% endfor %}
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ film.name }}</h5>
+                <p class="card-text">{{ film.description }}</p>
+                <p class="card-text"><small class="text-muted">{{ film.janre }}</small></p>
+                <p class="card-text"><small class="text-muted">{{ film.created_on }}</small></p>
+                <a href="{% url "film_update" film.id %}" class="card-link">Update</a>
+                <a href="{% url "film_delete" film.id %}" class="card-link">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="shows-container">
+    {% if film_show %}
+        {% for show in film_show %}
+            <div class="show-card card text-dark bg-light mb-3">
+                <div class="card-header">{{ show.teatr }}</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ show.date }}</h5>
+                    <p class="card-text">{{ show.time }}</p>
+                    <h5 class="card-title">Price: {{ show.price_bil }}</h5>
+                    <a href="{% url "order_create" %}" class="card-link">Order Billet</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No shows available for this film.</p>
+    {% endif %}
+</div>
 {% endblock content %}

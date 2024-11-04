@@ -1,17 +1,73 @@
 {% extends "base.html" %}
-{% block title %}show{% endblock title %}
+{% block title %}Show Details{% endblock title %}
 {% block content %}
+<style>
+    .card {
+        max-width: 18rem; /* Fixed width for larger screens */
+        margin: 20px auto; /* Center card with margin */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
 
-<div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-    <div class="card-header">{{show.teatr}}</div>
-    <div class="card-body">
-      <h5 class="card-title">{{show.date}}</h5>
-      <p class="card-text">{{show.time}}</p>
-      <h5 class="card-title">{{show.price_bil}}</h5>
-      <a href="{% url "order_create" %}" class="card-link">order billet</a>
+    .card-header {
+        background-color: #007bff; /* Bootstrap primary color */
+        color: white; /* White text for contrast */
+        text-align: center; /* Center header text */
+    }
+
+    .card-title {
+        font-size: 1.25rem; /* Slightly larger title */
+        margin-bottom: 10px; /* Space below title */
+    }
+
+    .card-text {
+        margin-bottom: 10px; /* Space below text */
+    }
+
+    .btn-primary {
+        width: 100%; /* Full-width button */
+    }
+
+    .card-footer {
+        background-color: #f8f9fa; /* Light background for footer */
+        border-top: 1px solid #ddd; /* Light border */
+    }
+
+    .card-link {
+        text-decoration: none; /* Remove underline */
+    }
+
+    .card-link:hover {
+        text-decoration: underline; /* Underline on hover */
+    }
+
+    .text-danger {
+        color: #dc3545; /* Bootstrap danger color for delete link */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .card {
+            width: 90%; /* Take up more width on smaller screens */
+            margin: 10px auto; /* Center with less margin */
+        }
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="card text-dark bg-light mb-3">
+        <div class="card-header">{{ show.teatr }}</div>
+        <div class="card-body">
+            <h5 class="card-title">Date: {{ show.date }}</h5>
+            <p class="card-text"><strong>Time:</strong> {{ show.time }}</p>
+            <h5 class="card-title">Price: {{ show.price_bil }}</h5>
+            <a href="{% url 'order_create' %}" class="btn btn-primary">Order Billet</a>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'show_update' show.id %}" class="card-link">Update</a>
+            <a href="{% url 'show_delete' show.id %}" class="card-link text-danger">Delete</a>
+        </div>
     </div>
-    <a href="{% url "show_update" show.id %}" class="card-link">update</a>
-    <a href="{% url "show_delete" show.id %}" class="card-link">delete</a>
-  </div>
+</div>
 
 {% endblock content %}

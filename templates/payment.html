@@ -1,9 +1,37 @@
 {% extends "base.html" %}
 {% block title %}pay{% endblock title %}
 {% block content %}
-    <form method = "post">
+<style>
+  .payment-form {
+    max-width: 400px; /* Set a max width for the form */
+    margin: 20px auto; /* Center the form on the page */
+    padding: 20px; /* Add some padding */
+    border: 1px solid #ced4da; /* Light border for form */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f8f9fa; /* Light background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+
+  .payment-form button {
+    width: 100%; /* Full width for the button */
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text for button */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Add some padding */
+    transition: background-color 0.3s; /* Smooth transition */
+  }
+
+  .payment-form button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+</style>
+
+<div class="payment-form">
+    <form method="post">
         {% csrf_token %}
-        {{form.as_p}}
-        <button type = "submit">Pay</button>
+        {{ form.as_p }}
+        <button type="submit">Pay</button>
     </form>
+</div>
 {% endblock content %}

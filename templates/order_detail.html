@@ -1,15 +1,20 @@
 {% extends "base.html" %}
 {% block title %}show{% endblock title %}
 {% block content %}
-    
-<div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-    <div class="card-header">{{order.showr}}</div>
-    <div class="card-body">
-      <h5 class="card-title">{{order.amount}}</h5>
-      <p class="card-text">{{order.phone}}</p>
-      <h5 class="card-title">{{order.name}}</h5>
+
+<div class="container mt-4">
+    <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header">{{ order.show }}</div>
+        <div class="card-body">
+            <h5 class="card-title">{{ order.amount }}</h5>
+            <p class="card-text"><strong>Phone:</strong> {{ order.phone }}</p>
+            <h5 class="card-title"><strong>Name:</strong> {{ order.name }}</h5>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'order_update' order.id %}" class="card-link">Update</a>
+            <a href="{% url 'order_delete' order.id %}" class="card-link text-danger">Delete</a>
+        </div>
     </div>
-    <a href="{% url "order_update" order.id %}" class="card-link">update</a>
-    <a href="{% url "order_delete" order.id %}" class="card-link">delete</a>
- </div>
+</div>
+
 {% endblock content %}
