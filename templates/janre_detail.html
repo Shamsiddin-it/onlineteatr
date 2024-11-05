@@ -55,7 +55,7 @@
                         <li class="list-group-item">{{ film.created_on }}</li>
                     </ul>
                     <div class="card-body">
-                        <a href="#" class="card-link">Order</a>
+                        <a href="{% url "order_create" %}" class="card-link">Order</a>
                         <a href="{% url "trailer" film.id %}" class="card-link">See Trailer</a>
                     </div>
                 </div>
